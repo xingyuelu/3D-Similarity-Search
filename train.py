@@ -14,7 +14,7 @@ def parse_args():
     parser.add_argument('--num_epoch', default=500, type=int, help='the number of epochs')
     parser.add_argument('--batch_size', default=64, type=int, help='mini batch size')
     parser.add_argument('--learning_rate', default=1e-4, type=float, help='learning rate of optimizer')
-    parser.add_argument('--data_path', default='./data/modelnet10.npz', type=str, help='path to dataset to train')
+    parser.add_argument('--data_path', default='./data/shape.npz', type=str, help='path to dataset to train')
     parser.add_argument('--logdir', default='./log', type=str, help='path to directory to save log')
     parser.add_argument('--checkpoint_dir', default='./checkpoint', type=str, help='path to directory to checkpoint')
     args = parser.parse_args()
@@ -34,9 +34,12 @@ def main():
 
     # Prepare data
     x_train, y_train, x_test, y_test = load_data(data_path)
+    #print(np.shape(x_train))
+    #print(np.shape(x_test))
+    
     x_train, y_train = shuffle(x_train, y_train)
 
-    num_train_data = x_train.shape[0]
+    num_train_data = x_train.shape[0]/100
 
     input_data = tf.placeholder(tf.float32, shape=[None, 32, 32, 32], name='input')
     net_input = input_data[..., np.newaxis]

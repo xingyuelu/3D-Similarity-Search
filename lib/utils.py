@@ -5,7 +5,7 @@ from sklearn.metrics import average_precision_score
 def load_data(data_path):
     """load array data from data_path"""
     data = np.load(data_path)
-    return data['X_train'], data['y_train'], data['X_test'], data['y_test']
+    return data['a'], data['b'], data['c'], data['d']
 
 
 def calculate_average_precision(label, index, similarity, num_search_sample):
